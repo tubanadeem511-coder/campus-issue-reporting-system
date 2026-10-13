@@ -1,69 +1,10 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Shell } from "./ui/shell";
+import { ArrowRight, Check, ClipboardCheck, Clock3, ShieldCheck, Wrench } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  return <Shell><section className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 pt-12 sm:pt-16 lg:grid-cols-[1.08fr_.92fr] lg:px-8 lg:pb-24 lg:pt-20">
+    <div><div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[#0B766E]"><span className="size-2 rounded-full bg-teal-600"/> Campus care, connected</div><h1 className="max-w-2xl text-[2.5rem] font-bold leading-[1.12] tracking-tight text-[#142B4A] sm:text-5xl lg:text-[52px]">A better campus starts with <span className="text-[#0B766E]">a fix.</span></h1><p className="mt-6 max-w-xl text-lg leading-8 text-[#475569]">Report classroom and facility issues in minutes. Follow progress from your personal dashboard, every step of the way.</p><div className="mt-8 flex flex-wrap gap-3"><Link href="/register" className="rounded-lg bg-[#142B4A] px-5 py-3.5 text-sm font-bold text-white shadow-sm hover:bg-[#0B766E]">Create your student account <ArrowRight className="ml-2 inline" size={17}/></Link><Link href="/login" className="rounded-lg border border-[#CBD5E1] bg-white px-5 py-3.5 text-sm font-bold text-[#163453] hover:bg-[#F4F7FB]">Sign in</Link></div><div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500"><span className="inline-flex items-center gap-2"><ShieldCheck size={16} className="text-[#0B766E]"/> Private by design</span><span className="inline-flex items-center gap-2"><Clock3 size={16} className="text-[#0B766E]"/> Live status updates</span></div></div>
+    <div className="relative mx-auto w-full max-w-lg"><div className="absolute -inset-5 rounded-[32px] bg-gradient-to-br from-teal-100/80 via-transparent to-blue-100/80 blur-xl"/><article className="relative rounded-2xl border border-[#E2E8F0] bg-white p-5 shadow-[0_18px_50px_-30px_rgba(20,43,74,.32)] sm:p-7"><div className="flex items-start justify-between"><div><p className="text-xs font-bold uppercase tracking-widest text-[#0B766E]">Your campus, in good hands</p><h2 className="mt-2 text-xl font-bold text-[#142B4A]">One report at a time.</h2></div><span className="grid size-11 place-items-center rounded-xl bg-[#eef5f7] text-[#0B766E]"><Wrench size={21}/></span></div><div className="mt-7 space-y-3">{[{icon:ClipboardCheck,title:"Tell us what needs attention",detail:"Choose a category, location and add a photo."},{icon:Clock3,title:"The right team picks it up",detail:"Campus staff review and update your report."},{icon:Check,title:"See the fix come together",detail:"Track status changes in your account."}].map((item,i)=><div key={item.title} className="flex gap-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 transition-colors hover:bg-[#F1F5F9]"><span className="grid size-10 shrink-0 place-items-center rounded-lg bg-white text-[#0B766E] shadow-sm ring-1 ring-slate-100"><item.icon size={18}/></span><div><p className="font-bold text-[#193653]">{item.title}</p><p className="mt-1 text-sm leading-5 text-slate-500">{item.detail}</p></div><span className="ml-auto self-start text-xs font-bold text-slate-300">0{i+1}</span></div>)}</div><div className="mt-5 rounded-xl bg-[#142B4A] p-4 text-white"><p className="text-sm font-bold">Better spaces. Better days.</p><p className="mt-1 text-xs text-blue-100">Your report helps keep campus running smoothly.</p></div></article></div>
+  </section><section className="border-y border-[#E2E8F0] bg-white"><div className="mx-auto grid max-w-7xl gap-5 px-5 py-8 sm:grid-cols-3 lg:px-8">{[{n:"01",t:"Report",d:"Describe an issue and where it is."},{n:"02",t:"We respond",d:"The campus team reviews and acts."},{n:"03",t:"Stay informed",d:"Check progress whenever you need."}].map(x=><div className="flex gap-4" key={x.n}><span className="text-sm font-black text-[#0B766E]">{x.n}</span><div><b className="text-[#172B4D]">{x.t}</b><p className="mt-1 text-sm text-slate-500">{x.d}</p></div></div>)}</div></section></Shell>;
 }

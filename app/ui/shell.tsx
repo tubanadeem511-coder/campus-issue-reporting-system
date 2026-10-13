@@ -1,0 +1,19 @@
+"use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "./auth";
+import { publicSupabase } from "@/lib/supabase";
+import { ArrowUpRight, Building2, ClipboardList, LogOut, Wrench } from "lucide-react";
+
+export function Shell({ children }: { children: React.ReactNode }) {
+  const { session, role } = useAuth(); const router = useRouter();
+  async function signOut() { await publicSupabase()?.auth.signOut(); router.push("/"); }
+  return <div className="min-h-screen bg-[#F4F7FB] text-[#172B4D]">
+    <header className="sticky top-0 z-20 border-b border-[#E2E8F0] bg-white/95 backdrop-blur"><div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+      <Link href="/" className="flex min-w-0 items-center gap-3 rounded-lg"><span className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#142B4A] text-white shadow-sm"><Wrench size={19}/></span><span><b className="block text-base leading-tight tracking-tight text-[#142B4A]">CampusFix</b><small className="hidden text-[10px] font-semibold tracking-[.12em] text-[#64748B] sm:block">CAMPUS ISSUE REPORTING</small></span></Link>
+      <nav aria-label="Main navigation" className="flex shrink-0 items-center gap-1 sm:gap-3 sm:text-sm">{session ? <><Link href="/complaints" className="inline-flex items-center gap-1.5 rounded-lg px-2 py-2 text-xs font-semibold text-[#475569] transition hover:bg-[#F1F5F9] hover:text-[#142B4A] sm:px-3 sm:text-sm"><ClipboardList size={16}/><span className="hidden sm:inline">My reports</span></Link><Link href={role === "admin" ? "/admin" : "/complaints/new"} className="rounded-lg bg-[#142B4A] px-3 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-[#0B766E] sm:px-4 sm:text-sm"><span className="sm:hidden">{role === "admin" ? "Admin" : "Report"}</span><span className="hidden sm:inline">{role === "admin" ? "Admin" : "New report"}</span></Link><button aria-label="Sign out" title="Sign out" onClick={signOut} className="grid size-10 place-items-center rounded-lg text-[#64748B] transition hover:bg-red-50 hover:text-red-700"><LogOut size={18}/></button></> : <><Link href="/login" className="rounded-lg px-2.5 py-2.5 text-xs font-semibold text-[#475569] transition hover:bg-[#F1F5F9] hover:text-[#142B4A] sm:px-3 sm:text-sm">Sign in</Link><Link href="/register" className="rounded-lg bg-[#142B4A] px-2.5 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-[#0B766E] sm:px-4 sm:text-sm"><span className="sm:hidden">Join</span><span className="hidden sm:inline">Create account</span><ArrowUpRight className="ml-1 inline" size={15}/></Link></>}</nav>
+    </div></header><main>{children}</main><footer className="mt-16 border-t border-[#E2E8F0] bg-white"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-3 px-5 py-7 text-xs text-[#64748B] sm:flex-row lg:px-8"><span>(c) 2026 CampusFix · Campus facilities support</span><span className="flex items-center gap-1"><Building2 size={14}/> A clearer way to care for campus</span></div></footer>
+  </div>;
+}
+export function StatusBadge({ status }: { status: string }) { const styles: Record<string,string> = { Pending:"bg-amber-50 text-amber-900 ring-amber-700/25", "In Progress":"bg-blue-50 text-blue-900 ring-blue-700/25", Resolved:"bg-emerald-50 text-emerald-900 ring-emerald-700/25" }; return <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold ring-1 ring-inset ${styles[status] ?? "bg-slate-100 text-slate-700 ring-slate-500/20"}`}><span className="size-1.5 rounded-full bg-current"/>{status}</span>; }
+export const control = "w-full min-w-0 rounded-lg border border-[#CBD5E1] bg-white px-3.5 py-3 text-sm text-[#172B4D] outline-none transition placeholder:text-[#64748B] focus:border-[#0F9488] focus:ring-2 focus:ring-[#0F9488]/15 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70";
